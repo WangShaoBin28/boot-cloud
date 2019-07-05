@@ -1,0 +1,45 @@
+server:
+  port: 8081
+
+
+eureka:
+  client:
+    service-url:
+     defaultZone: http://wsb:wsb@localhost:8080/eureka/
+    registry-fetch-interval-seconds: 5  #
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+
+spring:
+  application:
+    name: springboot-server
+
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 2000
+
+
+logging:
+  level:
+    com.app: debug
+
+
+#ribbon配置时长，处理超时
+ribbon:
+  eureka:
+    enabled: true
+  hystrix:
+    enabled: true
+  ConnectTimeout: 20000
+  ReadTimeout: 20000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetriesNextServer: 3
+  MaxAutoRetries: 3
